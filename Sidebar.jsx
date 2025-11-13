@@ -1,14 +1,13 @@
+import React from 'react'
 
-export const Sidebar = () => {
+const Sidebar = (props) => {
   return (
-    <aside className="col-md-2">
-        <ul>
-  <li>Home</li>
-  <li>About</li>
-  <li>Forum</li>
-  <li>Contact</li>
-    </ul>
-     </aside>
+    <> 
+    <div className="sidebar"> 
+    <h2> Sidebar </h2> 
+    <div className="links"> {props.children} </div>
+    </div>
+    </>
   )
 }
 

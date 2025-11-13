@@ -1,26 +1,28 @@
 
-//creating a reuseable Task component inside TaskList.jsx
-// that can only be used inside TaskList.jsx
+import Task from './Task'
 
-const Task= () => {
-  return (
-    <li>
-          <h3> Task: Clean Phone Storage</h3>
-          <p> Due: 10/25/25</p>
-        </li>
-  )
-}
+const TaskList = ({tasks}) => {
 
-const TaskList = () => {
+  const completedTask= (title) => {
+    alert(`You are now completing ${title}. `)
+  }
+  const deletedTask= (title) => {
+    alert(`${title} has been removed.`)
+  }
+
   return (
     <>
-      <ul> 
-        <Task />
-        <Task /> 
-        <Task /> 
-      </ul>
-    </>
-  )
-}
+    {tasks.map((task)=> (
+        <Task 
+        key={task.id}
+        task={task}
+        complete={()=> completedTask(task.title)}
+        deletedtask={()=> deletedTask(task.title)}
+        />
+         ))}
+         </>
+         )
+        }
+  
 
-export default TaskList;
+export default TaskList

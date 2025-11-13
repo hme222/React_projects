@@ -1,28 +1,41 @@
-import Greeting from './components/Movie'
+import { useState } from 'react'
 import './App.css'
-import Actor from './components/Actor'
-import Movie from './components/Movie'
+import {Routes, Route} from 'react-router-dom'
+import Home from './Components/Home'
+import Login from './Components/Login'
+import UserContext from './Context/UserContext'
+import ThemeContext from './Context/ThemeContext'
+import toggleTheme from './Components/ToggleTheme'
+import ToggleTheme from './Components/ToggleTheme'
+
 
 function App() {
-const movie1 = "Inception";
-const movie2 = "The Matrix";
-const movie3 = "Interstellar";
 
-const actor1 = { id: 1, name: "Leonardo DiCaprio", age: 46 };
-const actor2 = { id: 2, name: "Keanu Reeves", age: 57 };
-const actor3 = { id: 3, name: "Matthew McConaughey", age: 52 };
+
+const [user, setUser]= useState({
+  userName: "", 
+  isLoggedIn: false 
+})
+
+const [currentTheme, setTheme]= useState("light")
+// best place to set up the state for the entire application
 
   return (
     <>
-     <div>
-      <h1> Favorite Movies and Actors </h1>
-      <Movie title={movie1} />
-      <Movie title={movie2} />
-      <Movie title={movie3} />
-      <Actor actor={actor1} />
-      <Actor actor={actor2} />
-      <Actor actor={actor3} />
-     </div>
+      <h1> Context! </h1> 
+      {/* Step 2, provide the context */}
+      {/* wrap your application in the context you want to provide 
+      and use value to link context to the state you want to keep track 
+      of, in this case, the user state and setUser function */}
+      <UserContext value={{user, setUser}}>  
+      <ThemeContext value={{currentTheme, toggleTheme: setTheme}}>
+      <Routes> 
+      <Route path='/' element={<Home/>} value={<ToggleTheme/>} /> 
+      <Route path='/login' element={<Login/>} /> 
+      </Routes>
+      </ThemeContext>
+      </UserContext>
+
     </>
   )
 }
